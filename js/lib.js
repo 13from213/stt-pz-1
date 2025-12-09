@@ -15,13 +15,7 @@ function sum(a, b) {
  * @returns {number}
  */
 function pow(x, n) {
-  let result = 1;
-
-  for (let i = 0; i < n; i++) {
-    result *= x;
-  }
-
-  return result;
+  return Math.pow(x, n);
 }
 
 /**
@@ -30,6 +24,9 @@ function pow(x, n) {
  * @returns {number}
  */
 function factorial(n) {
+  if (n < 0) {
+    throw new Error("Факторіал від'ємного числа не існує");
+  }
   return n ? n * factorial(n - 1) : 1;
 };
 
@@ -39,7 +36,9 @@ function factorial(n) {
  * @returns {*|number}
  */
 function fibonacci(n) {
-  return (n > 2) ? fibonacci(n - 1) + fibonacci(n - 2) : 1;
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+  return fibonacci(n - 1) + fibonacci(n - 2);
 }
 
 /**
@@ -118,7 +117,7 @@ function httpGet(url) {
     };
 
     xhr.onerror = function () {
-      reject(new Error("Network Error"));
+      reject(new Error("Помилка мережі"));
     };
 
     xhr.send();
@@ -126,3 +125,4 @@ function httpGet(url) {
 
 }
 
+module.exports = { sum, pow, factorial, fibonacci, removeByName, makeCounter, getAsyncTimerId, asyncMultiply, httpGet };
